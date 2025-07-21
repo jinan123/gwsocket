@@ -6,6 +6,7 @@ toolchain go1.24.5
 
 require (
 	github.com/gogf/gf/v2 v2.9.0
+	github.com/zishang520/engine.io/v2 v2.5.0
 	github.com/zishang520/socket.io/v2 v2.5.0
 	golang.org/x/net v0.42.0
 )
@@ -37,7 +38,6 @@ require (
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	github.com/xo/terminfo v0.0.0-20210125001918-ca9a967f8778 // indirect
 	github.com/zishang520/engine.io-go-parser v1.3.2 // indirect
-	github.com/zishang520/engine.io/v2 v2.5.0 // indirect
 	github.com/zishang520/socket.io-go-parser/v2 v2.5.0 // indirect
 	github.com/zishang520/webtransport-go v0.9.1 // indirect
 	go.opentelemetry.io/otel v1.32.0 // indirect

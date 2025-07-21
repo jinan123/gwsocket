@@ -1,9 +1,9 @@
-package core
+package gws
 
 import (
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gctx"
-	"github.com/jinan123/gwsocket/gwio/internal/consts"
+	"github.com/jinan123/gwsocket/gwio/consts"
 	"github.com/zishang520/engine.io/v2/types"
 	"github.com/zishang520/socket.io/v2/socket"
 	"golang.org/x/net/context"
@@ -48,7 +48,8 @@ func NewSocketIoHandle(ctx context.Context, conf ...WsConf) http.Handler {
 		if len(clients) > 0 {
 			ctx = gctx.New()
 			conn := clients[0].(*socket.Socket)
-			h := loadDefaultWsEventHandle()
+			g.Dump("连接成功....")
+			h := DefaultWsEventHandles()
 			for _, f := range h {
 				err = f(ctx, conn)
 				if err != nil {

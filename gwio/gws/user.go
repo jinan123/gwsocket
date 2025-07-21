@@ -1,8 +1,8 @@
-package core
+package gws
 
 import (
 	"github.com/gogf/gf/v2/errors/gerror"
-	"github.com/jinan123/gwsocket/gwio/internal/dto"
+	"github.com/jinan123/gwsocket/gwio/dto"
 	"github.com/zishang520/socket.io/v2/socket"
 )
 

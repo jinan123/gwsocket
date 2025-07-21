@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gctx"
-	"github.com/jinan123/gwsocket/gwio/internal/dto"
+	"github.com/jinan123/gwsocket/gwio/dto"
 	"github.com/zishang520/socket.io/v2/socket"
 	"sync"
 )
