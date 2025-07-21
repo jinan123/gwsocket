@@ -23,22 +23,21 @@ type Event struct {
 }
 
 // Lifecycle 结构体，管理多个事件
-type Lifecycle struct {
+type GwsEvent struct {
 	mu     sync.RWMutex
 	name   string
 	events map[string]*Event
 }
 
-// NewLifecycle 创建生命周期管理器
-func NewLifecycle(name string) *Lifecycle {
-	return &Lifecycle{
+func NewGwsEvent(name string) *GwsEvent {
+	return &GwsEvent{
 		events: make(map[string]*Event),
 		name:   name,
 	}
 }
 
 // Register 注册事件及处理函数
-func (this *Lifecycle) Register(eventName string, handler Handler, middlewares ...Middleware) {
+func (this *GwsEvent) Register(eventName string, handler Handler, middlewares ...Middleware) {
 	this.mu.Lock()
 	defer this.mu.Unlock()
 	_, exists := this.events[eventName]
@@ -53,7 +52,7 @@ func (this *Lifecycle) Register(eventName string, handler Handler, middlewares .
 }
 
 // Trigger 触发事件，执行中间件和处理函数（洋葱模型）
-func (this *Lifecycle) Trigger(ctx context.Context, s socket.SocketId, msg dto.WsMsg) {
+func (this *GwsEvent) Trigger(ctx context.Context, s socket.SocketId, msg dto.WsMsg) {
 	this.mu.RLock()
 	event, exists := this.events[msg.GetEventName()]
 	this.mu.RUnlock()
@@ -82,14 +81,14 @@ func (this *Lifecycle) Trigger(ctx context.Context, s socket.SocketId, msg dto.W
 	}
 }
 
-func (this *Lifecycle) loadEvents() map[string]*Event {
+func (this *GwsEvent) loadEvents() map[string]*Event {
 	this.mu.RLock()
 	defer this.mu.RUnlock()
 	return this.events
 }
 
 // RunAll 主动触发所有事件
-func (this *Lifecycle) RunAll(ctx context.Context, s socket.SocketId, msg dto.WsMsg) {
+func (this *GwsEvent) RunAll(ctx context.Context, s socket.SocketId, msg dto.WsMsg) {
 	evs := this.loadEvents()
 	for eventName := range evs {
 		go func(evName string) {
@@ -99,6 +98,6 @@ func (this *Lifecycle) RunAll(ctx context.Context, s socket.SocketId, msg dto.Ws
 	g.Log().Infof(ctx, "%s All events started", this.GetName())
 }
 
-func (this *Lifecycle) GetName() string {
+func (this *GwsEvent) GetName() string {
 	return this.name
 }

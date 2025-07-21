@@ -24,6 +24,6 @@ func loadAckHandle(dataArray ...any) (AckHandle, error) {
 	return ackInterface, nil
 }
 
-func RegisterHandle(ctx context.Context, conn *socket.Socket) {
+func BindOn() {
 
 }
