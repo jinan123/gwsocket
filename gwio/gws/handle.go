@@ -24,6 +24,14 @@ func loadAckHandle(dataArray ...any) (AckHandle, error) {
 	return ackInterface, nil
 }
 
-func BindOn() {
+// on 事件绑定
+func BindOn(evName string, handler Handler, middlewares ...Middleware) {
+	name := "GWsOn_" + evName
+	GwsEventCtrl.Register(name, handler, middlewares...)
+}
 
+// emit 事件绑定
+func BindEmit(evName string, handler Handler, middlewares ...Middleware) {
+	name := "GWsEmit_" + evName
+	GwsEventCtrl.Register(name, handler, middlewares...)
 }
